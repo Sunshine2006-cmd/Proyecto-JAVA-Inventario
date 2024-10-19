@@ -6,24 +6,24 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 
-public class Categorias {
+public class Especificaciones {
     public static void main(String[] args) {
 
         String opciones = "";
-        File archivo = new File("Categorias.txt");
-        File archivoCopia = new File("Categorias_copia.txt");
-        String categoria = "";
+        File archivo = new File("Especificaciones.txt");
+        File archivoCopia = new File("Especificaciones_copia.txt");
+        String especificacion = "";
         String descripcion;
         String eliminar = "";
         String contenido;
         Boolean dato = false;
-        String[] accion = { "Ver Categorías", "Agregar", "Eliminar", "Regresar a Inicio" };
+        String[] accion = { "Ver Especificaciones", "Agregar", "Eliminar", "Regresar" };
 
         // Acciones a tomar(ver categorias, agregar, modificar, eliminar, regresar)
 
         while (!opciones.equals(accion[3])) {
             opciones = (String) JOptionPane.showInputDialog(null,
-                    "Categorías de productos. \n Por favor seleccione la acción que desea realizar.",
+                    "Especificaciones de productos. \n Por favor seleccione la acción que desea realizar.",
                     "Seleccione:", JOptionPane.DEFAULT_OPTION, null, accion, accion[0]);
                     if (opciones.equals(accion[0])) {
                         //Mostrar Contenido
@@ -31,7 +31,7 @@ public class Categorias {
                             contenido = "";
                             FileReader fr = new FileReader(archivo);
                             BufferedReader br = new BufferedReader(fr);
-                            JOptionPane.showMessageDialog(null, "Ver las categorías en la línea de comandos\n");
+                            JOptionPane.showMessageDialog(null, "Ver las especificaciones en la línea de comandos\n");
                             while ((contenido = br.readLine()) != null){
                                 System.out.println(contenido);
           
@@ -41,24 +41,24 @@ public class Categorias {
                             System.out.println("Error al leer el archivo");
                         }
 
-                    // agregar categoria
+                    // agregar especificación
                     } else if (opciones.equals(accion[1])) {
 
-                    // Evaluar nombre de la categoria(en blanco, vacia o repetida)
+                    // Evaluar nombre de la especificación(en blanco o vacia )
                         do {
-                            categoria = JOptionPane.showInputDialog(null,
-                            "Ingrese un nombre que no este vacío ",
+                            especificacion = JOptionPane.showInputDialog(null,
+                            "Ingrese un nombre que no este vacío o sea repetido",
                             JOptionPane.QUESTION_MESSAGE);
-                        } while (categoria.isBlank() || categoria.isEmpty());
+                        } while (especificacion.isBlank() || especificacion.isEmpty());
 
                         descripcion = JOptionPane.showInputDialog(null, "Ingrese una descripción (para omitir presione ok)",
                         JOptionPane.QUESTION_MESSAGE);
 
-                    // agregar categoria a archivo de texto
+                    // agregar especificación a archivo de texto
                         try {
                             FileWriter fw = new FileWriter(archivo, true);
                             BufferedWriter bw = new BufferedWriter(fw);
-                            bw.write(categoria + " | " + descripcion + "\n");
+                            bw.write(especificacion + " | " + descripcion + "\n");
                             bw.close();
 
                         } catch (IOException ex) {
@@ -67,8 +67,8 @@ public class Categorias {
 
                     } else if(opciones.equals(accion[2])) {
 
-                       // Pedir categoria a eliminar
-                        eliminar = (String) JOptionPane.showInputDialog(null, "¿Cuál categoría desea eliminar?",
+                       // Pedir especificación a eliminar
+                        eliminar = (String) JOptionPane.showInputDialog(null, "¿Cuál especificación desea eliminar?",
                             "Escriba:", JOptionPane.ERROR_MESSAGE);
 
                         if (eliminar != null && !eliminar.isBlank()){
@@ -81,7 +81,7 @@ public class Categorias {
                                 FileWriter fw = new FileWriter(archivoCopia);
                                 BufferedWriter bw = new BufferedWriter(fw);
 
-                                    //Condiciones para que se elimine la categoría
+                                    //Condiciones para que se elimine la especificación
 
                                     while ((contenido = br.readLine()) != null) {
                                         String[] datos = contenido.split("\\|");
@@ -100,10 +100,10 @@ public class Categorias {
                                     if (dato){
                                         archivo.delete();
                                         archivoCopia.renameTo(archivo);
-                                        JOptionPane.showMessageDialog(null,"La categoría se eliminará");
+                                        JOptionPane.showMessageDialog(null,"La especificación se eliminara");
                                     }else{
                                         archivoCopia.delete(); 
-                                        JOptionPane.showMessageDialog(null, "No se encontró la categoría");
+                                        JOptionPane.showMessageDialog(null, "No se encontró la especificación");
 
                                     }
                             } catch (IOException ex) {
@@ -118,3 +118,12 @@ public class Categorias {
 
     }
 }
+
+
+
+
+
+
+
+
+
